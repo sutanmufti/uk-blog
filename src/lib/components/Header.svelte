@@ -13,13 +13,13 @@
         <div class='stretch menucontainer'>
             <div class='flexbox' style='text-align: left;'>
                 <div class='menus'>
-                        <a href="#someref">
+                        <a href="{base}#someref">
                         Home
                     </a>
                     
                     </div>
                 <div class='menus'>
-                        <a href="#someref">
+                        <a href="{base}/blog#someref">
                         Blog
                     </a>
                 </div>
