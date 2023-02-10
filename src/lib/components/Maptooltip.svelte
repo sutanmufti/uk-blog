@@ -2,28 +2,44 @@
     export let x;
     export let y;
     export let display = false;
-
+    let windowsWidth;
     let styledisplay = "none"
     $: if(display) {
         styledisplay = "inline-block"
+        
     } else {
         styledisplay = "none"
     }
+
+    $: style = `top:${y}px;left:${x}px; display: ${styledisplay}`
 </script>
-<div id='main' style={`top:${y}px;left:${x}px; display: ${styledisplay}`}>
-    Map tooltip {x} {y}
+
+<svelte:window bind:innerWidth={windowsWidth}/>
+<div id='main' style={style}>
+    <div>
+        <button on:click={()=>{display = false}}>close</button>
+    </div>
+    <div>
+        Map tooltip {x} {y}  {windowsWidth}
+    </div>
 </div>
 
 
 <style>
     #main {
         display: none;
-        position: fixed;
+        position: absolute;
         height: 300px;
-        width: 400px;
-        border: 2px solid rgb(251,251,251);
+        width: 200px;
+        border: 2px solid rgb(240,240,240);
         border-radius: 5px;
         background-color: white;
         z-index: 99;
     }
+
+    @media only screen and (max-width: 600px) {
+        #main {
+    background-color: lightblue;
+  }
+}
 </style>
