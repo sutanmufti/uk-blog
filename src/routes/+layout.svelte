@@ -1,6 +1,7 @@
 <script>
     import Header from "$lib/components/Header.svelte";
     import { base } from "$app/paths";
+    import Footer from "$lib/components/Footer.svelte";
 </script>
 
 <svelte:head>
@@ -28,3 +29,4 @@
 
 <Header/>
 <slot></slot>
+<Footer/>
