@@ -1,16 +1,11 @@
 <script>
-    import * as d3 from 'd3'
-    import { onMount } from 'svelte';
-    import Maptooltip from '$lib/components/Maptooltip.svelte';
-
-
-    let london;
-
+    import { base } from "$app/paths";
     let showtooltip = false;
     
     let tooltipclick = false;
     
     let m = { x: 0, y: 0 };
+    
     function mousemove (event) {
         m.x = event.clientX;
 		m.y = event.clientY;
@@ -19,7 +14,6 @@
     function removeTooltip (){
     }
 </script>
-<Maptooltip x={m.x} y={m.y} display={showtooltip}/>
 
 <svelte:window on:click={removeTooltip}></svelte:window>
 
@@ -37,8 +31,10 @@
                     We collect stories from Indonesians accross the UK. This is the knowledge repository for Indonesian in the UK
                 </div>
                 <div class='goto'>
-                    <button id='go'>Go to Blog</button>
-                    <button id='colaborate'>I am Arriving in the UK</button>
+                    <a href="{base}/blog">
+                        <button id='go'>Go to Blog</button>
+                    </a>
+                    <button id='colaborate'>I am Arriving in London Soon!</button>
                 </div>
                 <!-- <form  action="/action_page.php">
                     <input class="searchinput" type="text" placeholder="Search.." name="search">
@@ -75,14 +71,8 @@
 
 
 <style>
-    .searchinput {
-        width: 80%;
-        height: 30px;
-        margin-top: 20px;
-        border: 1px solid grey;
-        border-radius: 20px;
-        padding: 10px;
-    }
+    
+    
 
     #points {
         position: absolute;
@@ -194,4 +184,9 @@ circle {
     cursor: pointer;
 }
 
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
 </style>
