@@ -62,7 +62,7 @@
             </svg>
         <!-- </div> -->
         <div id='ukcontainer'>
-            <img src="britain.svg" width='300px' alt="" id='uk'>
+            <img src="{base}/britain.svg" width='300px' alt="" id='uk'>
         </div>
     </div>
 
