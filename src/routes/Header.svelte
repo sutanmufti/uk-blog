@@ -19,7 +19,7 @@
                     
                     </div>
                 <div class='menus'>
-                        <a href="{base}/blog#someref">
+                        <a href="{base}/blog/0">
                         Blog
                     </a>
                 </div>

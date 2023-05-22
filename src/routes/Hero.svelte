@@ -31,7 +31,7 @@
                     We collect stories from Indonesians accross the UK. This is the knowledge repository for Indonesian in the UK
                 </div>
                 <div class='goto'>
-                    <a href="{base}/blog">
+                    <a href="{base}/blog/0">
                         <button id='go'>Go to Blog</button>
                     </a>
                     <button id='colaborate'>I am Arriving in London Soon!</button>
@@ -99,6 +99,7 @@
     .headone {
         width: 600px;
         height: 60vh;
+        margin-left: 10px;
         justify-content: start;
         flex-flow: row;
     }
@@ -139,7 +140,8 @@
         background-color: rgb(16,103,222);
         border-radius: 5px;
         cursor: pointer;
-        transition: box-shadow 0.2s
+        transition: box-shadow 0.2s;
+        margin-bottom: 5px;
     }
 
     #colaborate {
@@ -168,7 +170,7 @@
     flex-flow: column;
   }
   .headone {
-    width: 60vw;
+    width: 80vw;
   }
   /* #uk {
     width: 50vw;
