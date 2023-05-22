@@ -3,8 +3,16 @@ import { APIKEY, LIST,CUSTOMFIELD_LOCATION,CUSTOMFIELD_IMAGE } from '$env/static
 import { getTasksByPage } from '../story/[story]/Story';
 import type { CustomFieldLocation,CustomFieldImage, Tasks, } from '../story/[story]/SampleStory';
 
-export async function load() {
-    const posts: {tasks: Tasks[]} = await getTasksByPage(LIST,0,APIKEY);
+export async function load({params}) {
+    const pagenum = Number("0")
+    if (!pagenum && pagenum != 0) throw error(404, 'Not found');
+
+    const posts: {tasks: Tasks[], last_page: boolean} = await getTasksByPage(LIST,pagenum,APIKEY);
+
+
+    console.log(posts)
+    if(!posts.last_page) throw error(404, 'Not found');
+
 
     const stories = posts.tasks.map(d=> {
         
@@ -46,6 +54,7 @@ export async function load() {
         status: 200,
         data: stories,
         posts: posts,
+        last_page: posts.last_page
     }
    }
 
