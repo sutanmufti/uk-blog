@@ -20,7 +20,7 @@
 <div class='stories'>
     <div class='contents'>
         {#each stories as t,i}
-            <Story title={t.title} description={t.description} lat={t.location?.lat} long={t.location?.lng} image={t.image} created={t.time} storyid={t.id}/>
+            <Story title={t.title} description={t.description} lat={t.location?.lat} long={t.location?.lng} image={t.image} created={t.time} storyid={t.id} username={t.creator}/>
         
         {/each}
     </div>

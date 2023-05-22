@@ -38,6 +38,7 @@ export async function load({params}) {
         return {
             id: d.id,
             title: d.name,
+            creator: d.creator.username,
             description: d.description,
             location: locationfield,
             time: Number(d.date_created),

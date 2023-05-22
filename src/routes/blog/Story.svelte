@@ -2,6 +2,7 @@
     import { base } from "$app/paths";
     export let storyid: string;
     export let title: string;
+    export let username: string;
     export let lat: number | undefined = undefined;
     export let long: number | undefined= undefined;
     export let description: string;
@@ -21,7 +22,10 @@
     const theday = date.getDay() +1
 
     // Will display time in 10:30:23 format
-    const formattedTime = `${theyear}-${themonth}-${theday}`
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+    const formattedTime = `${monthNames[date.getMonth()]} ${theyear}`
 
 </script>
 
@@ -33,9 +37,9 @@
         <div>
             <h1>{title}</h1>
             <p>
-                {formattedTime}
+                By {username} • {formattedTime}
             </p>
-            <p>
+            <p class='description'>
                 {description}
             </p>
         </div>
@@ -55,6 +59,7 @@
         color: inherit;
         
     }
+    
     .imagecontainer {
         text-align: center;
         margin: 0 0 15px 0;
@@ -69,6 +74,10 @@
     h1 {
         font-size: 1.5em;
         font-weight: 600;
+        color: black;
+    }
+    h1:hover {
+        color: rgb(27, 99, 255);
     }
     p {
         margin: 5px 0 5px 0;
@@ -77,7 +86,7 @@
     .containertext{
         display: flex;
         justify-content: space-between;
-        margin: 5px;
+        margin: 5px 15px 5px 15px;
     }
     .main {
         border: 1px solid rgb(225, 225, 225);
@@ -90,9 +99,17 @@
   .containertext {
     flex-direction: column-reverse;
     text-align: center;
+    
   }
   .main {
     margin: 10px;
+    border: 0px solid rgb(225, 225, 225); 
+    /* border-top: 1px solid rgb(225, 225, 225); */
+    border-bottom: 1px solid rgb(225, 225, 225);
+    border-radius: 0;
+  }
+  .description{
+    display: none;
   }
 }
     
