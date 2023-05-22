@@ -46,6 +46,8 @@
         <div class='imagecontainer'>
             {#if image}
             <img class='thumbnail' src="{imageurl}" alt="">
+            {:else}
+            <div class='thumbnail'></div>
             {/if}
         </div>
     </div>
@@ -102,14 +104,23 @@
     
   }
   .main {
-    margin: 10px;
+    margin: 20px;
     border: 0px solid rgb(225, 225, 225); 
     /* border-top: 1px solid rgb(225, 225, 225); */
-    border-bottom: 1px solid rgb(225, 225, 225);
+    /* border-bottom: 1px solid rgb(225, 225, 225); */
     border-radius: 0;
   }
   .description{
     display: none;
+  }
+  .imagecontainer {
+    margin: 0;
+  }
+  h1{ 
+    margin: 0;
+  }
+  .thumbnail {
+    width: 100%;
   }
 }
     
