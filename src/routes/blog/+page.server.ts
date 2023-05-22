@@ -25,7 +25,7 @@ export async function load() {
         })
 
         const locationfield = (location[0]) ? location[0].value?.location : {lat: undefined, lng: undefined}
-        console.log("is location?")
+        // console.log("is location?")
         return {
             id: d.id,
             title: d.name,
