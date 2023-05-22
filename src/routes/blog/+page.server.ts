@@ -14,9 +14,10 @@ export async function load() {
         const imageExtract = image[0].value?.map(y=>{
 
 
-            const {thumbnail_large,
+            const {
+                // thumbnail_large,
                 thumbnail_medium,
-                thumbnail_small,
+                // thumbnail_small,
                 url} = y
             return {
                 thumbnail: thumbnail_medium,
