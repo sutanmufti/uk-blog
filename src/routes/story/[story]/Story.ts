@@ -134,6 +134,7 @@ async function getOrSetRedisContent(key: string, refresh: boolean, callback:  ()
         const value = await client.get(key);
         if (value && !refresh){
           console.log("getting key from redis, data valid", key)
+          await client.disconnect();
           return {status: "ok", data: value}
         }
 
