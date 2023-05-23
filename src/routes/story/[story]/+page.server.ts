@@ -7,7 +7,7 @@ export async function load({ params, url }) {
     const refresh = url.searchParams.get("refresh")
     const refreshredis = refresh == 'true'
 
-    const post: Story = await GetStory(params.story,APIKEY, false);
+    const post: Story = await GetStory(params.story,APIKEY, refreshredis);
     const comments: Comment = await getComments(params.story,APIKEY,refreshredis)
 
     
