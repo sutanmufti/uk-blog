@@ -19,10 +19,10 @@ export async function GetStory(storyid: string, apikey:string){
     return data
   }
 
-export async function getComments(storyid: string, apikey:string) {
+export async function getComments(storyid: string, apikey:string, refresh:boolean) {
 
 
-  const redisvalue = await getOrSetRedisContent(`story/${storyid}`, false, async ()=>{
+  const redisvalue = await getOrSetRedisContent(`story/${storyid}`, refresh, async ()=>{
         const resp = await fetch(
           `${BASEDATAURL}/${storyid}/comment`,
           {
@@ -64,8 +64,8 @@ return data
 
 
 
-export async function getTasksByPage(listid: string, page: number,apikey:string) {
-    const redisvalue = await getOrSetRedisContent(`list/${listid}/page/${page}`, false, async ()=>{
+export async function getTasksByPage(listid: string, page: number,apikey:string, refresh=false) {
+    const redisvalue = await getOrSetRedisContent(`list/${listid}/page/${page}`, refresh, async ()=>{
       const query = new URLSearchParams({
         page: `${page}`,
       }).toString();

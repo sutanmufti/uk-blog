@@ -33,22 +33,24 @@
     <a href="{base}/story/{storyid}">
 
     
-    <div class='containertext'>
-        <div>
+    <div class='containertext '>
+        <div class='component'>
             <h1>{title}</h1>
             <p>
                 By {username} • {formattedTime}
             </p>
-            <p class='description'>
+            <p class='description '>
                 {description}
             </p>
         </div>
-        <div class='imagecontainer'>
-            {#if image}
-            <img class='thumbnail' src="{imageurl}" alt="">
-            {:else}
-            <div class='thumbnail'></div>
-            {/if}
+        <div class='imagecontainer component'>
+
+                {#if image}
+                <img class='thumbnail' src="{imageurl}" alt="">
+                {:else}
+                <div class='thumbnail'></div>
+                {/if}
+
         </div>
     </div>
 </a>
@@ -56,6 +58,14 @@
 
 
 <style>
+    .component {
+        margin: 10px
+    }
+
+    .imagepadding{
+        /* margin: 10px; */
+        height: 100%;
+    }
     a {
         text-decoration: none;
         color: inherit;
@@ -64,11 +74,16 @@
     
     .imagecontainer {
         text-align: center;
-        margin: 0 0 15px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 10 0 10px 0;
     }
     .thumbnail {
+        /* padding: 10px; */
+        display: block;
         width: 250px;
-        height: 150px;
+        height: 100px;
         border-radius: 15px;
         border: 1px solid rgb(190, 190, 190);
         object-fit: cover
@@ -88,12 +103,19 @@
     .containertext{
         display: flex;
         justify-content: space-between;
-        margin: 5px 15px 5px 15px;
+        margin: 0px 15px 0px 15px;
     }
     .main {
-        border: 1px solid rgb(225, 225, 225);
+        /* border: 1px solid rgb(225, 225, 225); */
+        /* border-top: 1px solid rgb(225, 225, 225); */
+        /* border-bottom: 1px solid rgb(225, 225, 225); */
+        border-radius: 0px;
+        margin: 10px 0 10px 0;
+    }
+
+    .main:hover {
+        background-color: rgb(242, 242, 242);
         border-radius: 10px;
-        margin: 10px 0 0 0;
     }
 
 

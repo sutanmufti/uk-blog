@@ -3,9 +3,12 @@ import { APIKEY, CUSTOMFIELD_STORY } from '$env/static/private';
 import { GetStory,getComments } from './Story';
 import type { Story, StorySuccess, Comment } from './SampleStory';
 
-export async function load({ params }) {
+export async function load({ params, url }) {
+    const refresh = url.searchParams.get("refresh")
+    const refreshredis = refresh == 'true'
+
     const post: Story = await GetStory(params.story,APIKEY);
-    const comments: Comment = await getComments(params.story,APIKEY)
+    const comments: Comment = await getComments(params.story,APIKEY,refreshredis)
 
     
     if (post.err){

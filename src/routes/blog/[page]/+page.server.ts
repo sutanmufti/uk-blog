@@ -3,7 +3,10 @@ import { APIKEY, LIST,CUSTOMFIELD_LOCATION,CUSTOMFIELD_IMAGE } from '$env/static
 import { getTasksByPage } from '../../story/[story]/Story';
 import type { CustomFieldLocation,CustomFieldImage, Tasks, } from '../../story/[story]/SampleStory';
 
-export async function load({params}) {
+export async function load({params, url}) {
+
+    const refresh = url.searchParams.get("refresh")
+
     const pagenum = Number(params.page)
     if (!pagenum && pagenum != 0) throw error(404, 'Not found');
 
