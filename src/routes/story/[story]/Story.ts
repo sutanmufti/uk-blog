@@ -3,7 +3,25 @@ import { BASEDATAURL,BASEDATATASKS } from '$env/static/private';
 import { createClient } from 'redis';
 
 
-export async function GetStory(storyid: string, apikey:string){
+export async function GetStory(storyid: string, apikey:string, refresh: boolean){
+  const redisvalue = await getOrSetRedisContent(`story/story/${storyid}`, refresh, async ()=>{
+      const resp = await fetch(
+        `${BASEDATAURL}/${storyid}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: apikey
+          }
+        }
+      );
+    
+      const data = await resp.text();
+      return data
+  })
+
+  if((redisvalue.status == 'ok') || (redisvalue.status == 'set')){
+  return JSON.parse(redisvalue.data)
+  }
   
     const resp = await fetch(
       `${BASEDATAURL}/${storyid}`,
@@ -22,7 +40,7 @@ export async function GetStory(storyid: string, apikey:string){
 export async function getComments(storyid: string, apikey:string, refresh:boolean) {
 
 
-  const redisvalue = await getOrSetRedisContent(`story/${storyid}`, refresh, async ()=>{
+  const redisvalue = await getOrSetRedisContent(`story/comment/${storyid}`, refresh, async ()=>{
         const resp = await fetch(
           `${BASEDATAURL}/${storyid}/comment`,
           {
@@ -52,8 +70,8 @@ export async function getComments(storyid: string, apikey:string, refresh:boolea
       }
   );
 
-  const data = await resp.json();
-return data
+    const data = await resp.json();
+  return data
 
   }
 
@@ -146,5 +164,5 @@ async function getOrSetRedisContent(key: string, refresh: boolean, callback:  ()
     } catch {
         console.log("no redis")
         return {status: "offline", data: ""}
-}
+    }
 }
