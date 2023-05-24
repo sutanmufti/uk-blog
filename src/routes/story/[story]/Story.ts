@@ -1,6 +1,8 @@
-import { BASEDATAURL,BASEDATATASKS } from '$env/static/private';
+import { BASEDATAURL,BASEDATATASKS,REDISSECONDEXPIRY } from '$env/static/private';
 // import type { RedisClientType } from '@redis/client';
 import { createClient } from 'redis';
+
+console.log('redis cach second', REDISSECONDEXPIRY)
 
 
 export async function GetStory(storyid: string, apikey:string, refresh: boolean){
@@ -153,6 +155,9 @@ export async function getTasksByPage(listid: string, page: number,apikey:string,
  * @returns 
  */
 async function getOrSetRedisContent(key: string, refresh: boolean, callback:  ()=>Promise<string>): Promise<{ status: "ok" | "set" | "offline"; data: string; }>{
+
+  const redisSecond = (REDISSECONDEXPIRY) ? Number(REDISSECONDEXPIRY) : 60;
+
   const client = createClient(
     {
       socket:{
@@ -171,8 +176,9 @@ async function getOrSetRedisContent(key: string, refresh: boolean, callback:  ()
         }
 
         const data = await callback()
+        // console.log('redis cach second', REDISSECONDEXPIRY)
         console.log("SETTING key from redis, data valid", key)
-        await client.setEx(key, 10*60,data);
+        await client.setEx(key, redisSecond,data);
         await client.disconnect();
         return {status: "set", data: data}
     } catch {
