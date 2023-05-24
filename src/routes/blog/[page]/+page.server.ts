@@ -4,7 +4,7 @@ import { getTasksByPage } from '../../story/[story]/Story';
 import type { CustomFieldLocation,CustomFieldImage, Tasks, } from '../../story/[story]/SampleStory';
 
 
-export const prerender = true;
+export const prerender = false;
 
 export async function load({params, url}) {
 
