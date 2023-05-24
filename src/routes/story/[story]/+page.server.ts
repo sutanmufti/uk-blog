@@ -12,7 +12,7 @@ export async function load({ params, url }) {
     const image = <CustomFieldImage[]>post.custom_fields.filter(d=>d.id===CUSTOMFIELD_IMAGE && d.type=='attachment')
 
     // console.log('comments:',comments)
-    console.log('thecomments:',comments.comments.map(d=>d.comment.map(p=>p.attachment)))
+    // console.log('thecomments:',comments.comments.map(d=>d.comment.map(p=>p.attachment)))
     const imageExtract = image[0].value?.map(y=>{
 
 
