@@ -44,18 +44,23 @@
                 {#each commentssorted as comment, i}
                 <div class='dialogue'>
                     <div class='user'>
-                        
-                        <div style='color: {comment.user.color}'>
-                            {comment.user.username} 
+                        <div class='profilepicture'>
+                            <img class='profilepictureimg' src="{comment.user.profilePicture}" alt="">
                         </div>
-                        <div>
-                        • {((comment)=>{
-                            const date = new Date(Number(comment.date))
-                            const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
-                            const theyear = date.getFullYear()
-                            const formattedTime = `${monthNames[date.getMonth()]} ${theyear}`
-                            return formattedTime
-                        })(comment)}
+                        <div class='usercontent'>
+                            <div style='color: {comment.user.color}'>
+                                {comment.user.username} 
+                            </div>
+                            <!-- •  -->
+                            <div>
+                            {((comment)=>{
+                                const date = new Date(Number(comment.date))
+                                const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+                                const theyear = date.getFullYear()
+                                const formattedTime = `${monthNames[date.getMonth()]} ${theyear}`
+                                return formattedTime
+                            })(comment)}
+                            </div>
                         </div>
                     </div>
                         <div class='comment'>
@@ -68,6 +73,21 @@
         </div>
 </div>
 <style>
+    .profilepictureimg{
+        height: 100%;
+    }
+    .usercontent{
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .profilepicture{
+        display: inline-block;
+        height: 50px;
+        width: 50px;
+        align-items:end;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
     .heading{
         display: flex;
         align-items: center;
@@ -94,6 +114,7 @@
     .user {
         width: 120px;
         color: rgb(200, 200, 200);
+        text-align: end;
         border-right: 1px solid rgb(199, 199, 199);
         /* border: 2px solid purple */
     }
@@ -144,7 +165,8 @@
             /* width: 120px; */
             flex: 1;
             display: flex;
-            justify-content: space-between;
+            justify-content: start;
+            flex-direction: row;
             width: 100%;
             color: rgb(200, 200, 200);
             border-right: 0px solid black;
@@ -153,9 +175,12 @@
             /* border: 2px solid purple */
         }
         .comment {
-        /* border: 1px solid red; */
-        flex: 1;
-        margin-left: 0px;
-    }
+            /* border: 1px solid red; */
+            flex: 1;
+            margin-left: 0px;
+        }
+        .usercontent{
+            text-align: start;
+        }
     }
 </style>
