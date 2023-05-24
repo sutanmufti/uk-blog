@@ -4,7 +4,8 @@
     export let data: {
             status: 200,
             name: string,
-            story:  Comment
+            story:  Comment,
+            img: string | ""
         };
 
     const comments = data.story.comments
@@ -28,7 +29,18 @@
 
     <div class='story-container'>
             <div class='story'>
-                <h1>{data.name}</h1>
+                <div class='heading'>
+                    <div class='imagecontainer component'>
+                        
+                        {#if data.img}
+                        <img class='thumbnail' src="{data.img}" alt="">
+                        {:else}
+                        <div class='thumbnail'></div>
+                        {/if}
+                        
+                    </div>
+                    <h1>{data.name}</h1>
+                </div>
                 {#each commentssorted as comment, i}
                 <div class='dialogue'>
                     <div class='user'>
@@ -56,6 +68,12 @@
         </div>
 </div>
 <style>
+    .heading{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin: 30px 0 20px 0;
+    }
     .story-container{
         width: 800px;
         /* border: 1px solid red; */
@@ -86,11 +104,33 @@
     }
 
 
+    .thumbnail {
+        /* padding: 10px; */
+        display: block;
+        width: 600px;
+        height: 400px;
+        border-radius: 15px;
+        border: 1px solid rgb(190, 190, 190);
+        object-fit: cover
+    }
+    .imagecontainer {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 10 0 10px 0;
+    }
+
+
 
     @media only screen and (max-width: 600px) {
         .story-container{
             width: 370px;
             /* border: 1px solid red; */
+        }
+        .thumbnail {
+            width: 300px;
+            height: 250px;
         }
         .dialogue {
             display: flex;
