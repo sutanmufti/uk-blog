@@ -3,6 +3,9 @@ import { APIKEY, LIST,CUSTOMFIELD_LOCATION,CUSTOMFIELD_IMAGE } from '$env/static
 import { getTasksByPage } from '../../story/[story]/Story';
 import type { CustomFieldLocation,CustomFieldImage, Tasks, } from '../../story/[story]/SampleStory';
 
+
+export const prerender = true;
+
 export async function load({params, url}) {
 
     const refresh = url.searchParams.get("refresh")
