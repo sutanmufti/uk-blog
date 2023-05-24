@@ -4,6 +4,8 @@ import { createClient } from 'redis';
 
 
 export async function GetStory(storyid: string, apikey:string, refresh: boolean){
+
+  
   const redisvalue = await getOrSetRedisContent(`story/story/${storyid}`, refresh, async ()=>{
       const resp = await fetch(
         `${BASEDATAURL}/${storyid}`,
@@ -82,14 +84,29 @@ export async function getComments(storyid: string, apikey:string, refresh:boolea
 
 
 
-export async function getTasksByPage(listid: string, page: number,apikey:string, refresh=false) {
+export async function getTasksByPage(listid: string, page: number,apikey:string, refresh=false, status?: string[]) {
+
+    const queryparam = new URLSearchParams({
+      page: `${page}`
+    })
+
+    if (status){
+      if (status.length > 0){
+        status.forEach(p=>queryparam.append("statuses", p))
+        
+      }
+    }
+
+    const query = queryparam.toString();
+    const url = `${BASEDATATASKS}/${listid}/task?${query}`
+
+
+
+
     const redisvalue = await getOrSetRedisContent(`list/${listid}/page/${page}`, refresh, async ()=>{
-      const query = new URLSearchParams({
-        page: `${page}`,
-      }).toString();
-    
+      console.log(url)
       const resp = await fetch(
-        `${BASEDATATASKS}/${listid}/task?${query}`,
+        url,
         {
           method: 'GET',
           headers: {
@@ -109,12 +126,9 @@ export async function getTasksByPage(listid: string, page: number,apikey:string,
     // this means redis is offline
     else {
 
-      const query = new URLSearchParams({
-        page: `${page}`,
-      }).toString();
-    
+      console.log(url)
       const resp = await fetch(
-        `${BASEDATATASKS}/${listid}/task?${query}`,
+        url,
         {
           method: 'GET',
           headers: {

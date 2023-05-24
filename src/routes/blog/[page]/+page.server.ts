@@ -6,14 +6,15 @@ import type { CustomFieldLocation,CustomFieldImage, Tasks, } from '../../story/[
 export async function load({params, url}) {
 
     const refresh = url.searchParams.get("refresh")
+    console.log('refresh?',refresh)
 
     const pagenum = Number(params.page)
     if (!pagenum && pagenum != 0) throw error(404, 'Not found');
 
-    const posts: {tasks: Tasks[], last_page: boolean} = await getTasksByPage(LIST,Number(params.page),APIKEY);
+    const posts: {tasks: Tasks[], last_page: boolean} = await getTasksByPage(LIST,Number(params.page),APIKEY, refresh==='true',['PUBLISHED','closed']);
 
 
-    console.log(posts)
+    // console.log(posts)
     if(!posts.last_page) throw error(404, 'Not found');
 
 
